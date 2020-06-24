@@ -1,0 +1,19 @@
+#star{ 
+	color:#6c757d;
+	text-in
+}
+#star:hover{
+	color:#ffc107;
+}
+#star:hover ~ #star{
+	color:#ffc107;
+	animation-name: pulse;
+}
+#radios{
+      direction: rtl;/* right to left */
+      unicode-bidi: bidi-override;/* bidi de bidireccional */
+}
+input[type = "radio"]:checked ~ #star{
+	color: #6c757d;
+	color:#ffc107;
+}
