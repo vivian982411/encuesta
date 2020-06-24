@@ -5,21 +5,21 @@ require_once 'alumno.lib.php';
 require_once 'administrador.lib.php';
 require_once 'departamento.lib.php';
 	switch ($_POST["opc"]) {
-	case 'encuesta':
-		$enc = new Encuesta();
-		switch ($_POST["acc"]) {
-			case 'buscarDepartamento':
-				$var= $enc->getDepartamento($_POST['idDep']);
-				$info=explode("|",$var);
-				echo $var."---";
-				echo $preguntas=$enc->getPreguntas($info[0]);
-				break;
-			case 'obtenerPreguntas':
-			    echo $preguntas=$enc->getPreguntas($_POST['id']);
-				break;
-			case 'guardar':
-				$encuesta = $enc->guardarEncuesta($_POST['preguntas'],$_POST['respuestas'],$_POST['comentarios'],$_SESSION['alumno']['nocontrol']);
-				if ($encuesta=="ok") {
+		case 'encuesta':
+			$enc = new Encuesta();
+			switch ($_POST["acc"]) {
+				case 'buscarDepartamento':
+					$var= $enc->getDepartamento($_POST['idDep']);
+					$info=explode("|",$var);
+					echo $var."---";
+					echo $preguntas=$enc->getPreguntas($info[0]);
+					break;
+				case 'obtenerPreguntas':
+					echo $preguntas=$enc->getPreguntas($_POST['id']);
+					break;
+				case 'guardar':
+					$encuesta = $enc->guardarEncuesta($_POST['preguntas'],$_POST['respuestas'],$_POST['comentarios'],$_SESSION['alumno']['nocontrol']);
+	if ($encuesta=="ok") {
 					echo "<div class='row m-5' style='background-color:rgba(255,255,255,0.8);'>
 								<div class='col-md-1'></div>
 								<div class='col-md-10'>
@@ -97,6 +97,9 @@ require_once 'departamento.lib.php';
 				$contenido='Solicitudes';
 				echo $contenido;
 				break;
+			case 'variable':
+				# code...
+				break;
 		}
 		break;
 	case 'departamentos':
@@ -110,14 +113,30 @@ require_once 'departamento.lib.php';
 				$dep = new Departamento();
 				$dep->guardarPregunta($_POST['id'],$_POST['pregunta']);
 				break;
+			case 'showdepartamentosreporte':
+				$dep= new Departamento();
+				echo $dep->getDepartamentosReporte();
+				break;
 			case 'generarXLS':
 				$dep = new Departamento();
-				if ($_POST['dep']==8) {
+				if ($_POST['dep']=='general') {
 					echo $dep->generarXLSGeneral();
 				}else{
-					echo $dep->generarXLS($_POST['dep']);
+					echo $dep->generarXLS($_POST['dep'],$_POST['nombredep']);
 				}
-
+				break;
+			case 'nuevaPregunta':
+				$dep = new Departamento();
+				$id= $dep->guardarNuevaPregunta($_POST['iddep'],$_POST['pregunta']);
+				if ($id>0) {
+					echo "ok";
+				}else{
+					echo "error";
+				}
+				break;
+			case 'nuevoDepartamento':
+				$dep= new Departamento();
+				echo $dep->nuevoDepartamento($_POST['nombredep'],$_POST['preguntas']);
 				break;
 		}
 		break;

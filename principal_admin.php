@@ -20,7 +20,7 @@
 		<link rel="stylesheet" type="text/css" href="css/animate.css">
 		<link rel="stylesheet" type="text/css" href="css/sweetalert2.min.css">
   </head>
-  <body style="background-color: #FFF">
+  <body style="background-color: #F2EFEF">
 		
 		<div class="wrapper d-flex align-items-stretch">
 			<nav id="sidebar">
@@ -42,6 +42,9 @@
 	          <li>
 	          <li>
 	              <a style="cursor: pointer;" onclick="mostrarVista('admin','reportes');">Reportes</a>
+	          </li>
+	          <li>
+	              <a style="cursor: pointer;" onclick="mostrarVista('admin','configuracion');">Configuración</a>
 	          </li>
 	          <li>
              	 <a style="cursor: pointer;" onclick="cerrarAdmi();" >Cerrar Sesión</a>

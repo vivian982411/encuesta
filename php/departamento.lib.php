@@ -11,6 +11,30 @@ require_once 'excelwriter.inc.php';
  	{
  		$this->open();
  	}
+ 	function nuevoDepartamento($nombre,$preguntas){
+ 		$iddep= $this->insertRId("INSERT INTO departamento VALUES(null,'$nombre');");
+ 		$pregs= explode("|",$preguntas);
+ 		for ($i=0; $i <sizeof($pregs)-1 ; $i++) { 
+ 			$insert= $this->insertRId("INSERT INTO preguntadepartamento VALUES(null,'$pregs[$i]','$iddep');");
+ 		}
+ 		return "ok";
+ 	}
+ 	function getDepartamentos(){
+ 		$cad= "";
+ 		$consul= $this->select("SELECT * FROM departamento");
+ 		while ($ren= $consul->fetch_array()) {
+ 			$cad.='<div class="btn btn-info m-1 animated bounceInDown" style="width:150px; height:60px;" onclick="javascript:mostrarVistaDepartamento(\''.$ren['id_dep'].'\',\'mostrardepartamento\',\''.ucwords($ren['nom_dep']).'\');">'.ucwords($ren['nom_dep']).'</div>';
+ 		}
+ 		return utf8_encode($cad);
+ 	}
+ 	function getDepartamentosReporte(){
+ 		$cad= "";
+ 		$consul= $this->select("SELECT * FROM departamento");
+ 		while ($ren= $consul->fetch_array()) {
+ 			$cad.=$ren['id_dep'].'|'.ucwords($ren['nom_dep']).';';
+ 		}
+ 		return $cad;
+ 	}
  	function getencuestaDepartamentos($id){
  		$consulta= $this->select("SELECT nom_dep as departamento, preguntadepartamento.num_predep as Nopregunta, pre_predep as pregunta,(SELECT COUNT(res_resenc) FROM respuestaencuesta WHERE res_resenc='1' and num_predep=Nopregunta) as Terrible,(SELECT COUNT(res_resenc) FROM respuestaencuesta WHERE res_resenc='2' and num_predep=Nopregunta) as malo,(SELECT COUNT(res_resenc) FROM respuestaencuesta WHERE res_resenc='3' and num_predep=Nopregunta) as regular,(SELECT COUNT(res_resenc) FROM respuestaencuesta WHERE res_resenc='4' and num_predep=Nopregunta) as bueno,(SELECT COUNT(res_resenc) FROM respuestaencuesta WHERE res_resenc='5' and num_predep=Nopregunta) as excelente FROM departamento join preguntadepartamento on departamento.id_dep=preguntadepartamento.id_dep join respuestaencuesta on respuestaencuesta.num_predep=preguntadepartamento.num_predep WHERE departamento.id_dep='$id' GROUP BY respuestaencuesta.num_predep;");
  		$cad= "";
@@ -23,6 +47,10 @@ require_once 'excelwriter.inc.php';
  		$consulta=$this->select("UPDATE preguntadepartamento set pre_predep='$pregunta' WHERE num_predep='$id';");
  		return "ok";
  	}
+ 	function guardarNuevaPregunta($id,$pregunta){
+ 		$consulta=$this->insertRId("INSERT INTO preguntadepartamento VALUES(null,'$pregunta','$id');");
+ 		return $consulta;
+ 	}
  	function getComentarios($dep){
  		$consulta=$this->select("SELECT * FROM comentariodepartamento WHERE id_dep='$dep'");
  		$cad="";
@@ -32,7 +60,16 @@ require_once 'excelwriter.inc.php';
  		return utf8_encode($cad);
  	}
  	 function generarXLSGeneral(){
- 		$id=1;
+ 	 	$id=1;
+ 	 	$cont=0;
+ 		$consult= $this->select("SELECT count(id_dep) as cuantos FROM departamento");
+ 		$cuenta=$consult->fetch_array();
+ 		$numdeps=intval($cuenta['cuantos']);
+ 		$consult=$this->select("SELECT nom_dep from departamento");
+ 		while ($ren=$consult->fetch_array()) {
+ 			$nombres[$cont]=$ren['nom_dep']	;
+ 			$cont++;
+ 		}
 		$excel= new ExcelWriter("reportes/ReporteGeneral.xls");
 		if ($excel==false) {
 		echo $excel->error;
@@ -47,32 +84,8 @@ require_once 'excelwriter.inc.php';
 		$myArr= array("","","Reporte General de Evaluación Departamental");
 		$excel->writeLine($myArr,array("text-align"=>"center",'font-size'=>"18px","font-weight"=>"bolder"));
 
- 		while($id<8){
- 			$nombre="";
-	 		switch ($id) {
-				case '1':
-					$nombre="Centro De Informacion";
-					break;
-				case '2':
-					$nombre="Coordinacion De Carreras";
-					break;
-				case '3':
-					$nombre="Recursos Financieros";
-					break;
-				case '4':
-					$nombre="Residencias Profesionales";
-					break;
-				case '5':
-					$nombre="Centro De Computo";
-					break;
-				case '6':
-					$nombre="Servicios Escolares";
-					break;
-				case '7':
-					$nombre="Servicio Social";
-					break;
-				
-			}
+ 		while($id<=$numdeps){
+ 			$nombre=$nombres[$id-1];
 			$excel->writeRow();
 			$excel->writeRow();
 			$cad="SELECT nom_dep as departamento, preguntadepartamento.num_predep as Nopregunta, pre_predep as pregunta,(SELECT COUNT(res_resenc) FROM respuestaencuesta WHERE res_resenc='1' and num_predep=Nopregunta) as terrible,(SELECT COUNT(res_resenc) FROM respuestaencuesta WHERE res_resenc='2' and num_predep=Nopregunta) as malo,(SELECT COUNT(res_resenc) FROM respuestaencuesta WHERE res_resenc='3' and num_predep=Nopregunta) as regular,(SELECT COUNT(res_resenc) FROM respuestaencuesta WHERE res_resenc='4' and num_predep=Nopregunta) as bueno,(SELECT COUNT(res_resenc) FROM respuestaencuesta WHERE res_resenc='5' and num_predep=Nopregunta) as excelente FROM departamento join preguntadepartamento on departamento.id_dep=preguntadepartamento.id_dep join respuestaencuesta on respuestaencuesta.num_predep=preguntadepartamento.num_predep WHERE departamento.id_dep='".$id."' GROUP BY respuestaencuesta.num_predep";
@@ -104,33 +117,8 @@ require_once 'excelwriter.inc.php';
  		}
  		$excel->close();
  	}
- 	function generarXLS($id){
- 		$nombre="";
- 		switch ($id) {
-			case '1':
-				$nombre="Centro De Informacion";
-				break;
-			case '2':
-				$nombre="Coordinacion De Carreras";
-				break;
-			case '3':
-				$nombre="Recursos Financieros";
-				break;
-			case '4':
-				$nombre="Residencias Profesionales";
-				break;
-			case '5':
-				$nombre="Centro De Computo";
-				break;
-			case '6':
-				$nombre="Servicios Escolares";
-				break;
-			case '7':
-				$nombre="Servicio Social";
-				break;
-			
-		}
- 		$excel= new ExcelWriter("reportes/Reporte".str_replace(' ', '', $nombre).".xls");
+ 	function generarXLS($id,$nombre){
+ 		$excel= new ExcelWriter("reportes/Reporte".$nombre.".xls");
 			if ($excel==false) {
 				echo $excel->error;
 				die;
