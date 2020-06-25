@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("encuesta.lib.php");
 require_once ("departamento.lib.php");
 	switch ($_POST['opc']) {
@@ -17,7 +18,7 @@ require_once ("departamento.lib.php");
 							<div class="col-md-10">
 								<div class="row text-center">
 									<div class="col-md-1"></div>
-									<div class="col-md-2"><label class="h4 font-weight-bold text-danger mr-3" aling="center">Terrible</label></div>
+									<div class="col-md-2"><label class="h4 font-weight-bold text-danger mr-3" aling="center">Muy Mala</label></div>
 									<div class="col-md-2"><label class="h4 font-weight-bold text-warning mr-3" aling="center">Mala</label></div>
 									<div class="col-md-2"><label class="h4 font-weight-bold text-secondary mr-3" aling="center">Regular</label></div>
 									<div class="col-md-2"><label class="h4 font-weight-bold text-info mr-3" aling="center">Buena</label></div>
@@ -42,10 +43,10 @@ require_once ("departamento.lib.php");
 							</div>
 							<div class="col-md-1"></div>
 							</div>
-				          <p align="left" class="h3 m-3" style="text-align: justify;">2. Si desea expresar algún comentario, sugerencia o recomendación utilice el espacio destinado para ello.</p>
+				          <p align="left" class="h3 m-3" style="text-align: justify;">2. Si desea expresar algún comentario, sugerencia,recomendación o queja utilice el espacio destinado para ello.</p>
 				          <br><br>
-				          <p align="center" style="text-align: justify;" class="h2 font-weight-bold text-primary m-3">Contesta con la mayor sinceridad posible recuerda que tu opinion hace la diferencia</p>
-				          <p align="center"  style="text-align: justify;" class="h2 text-danger m-3">Una vez comenzada la encuesta, procura no cerrar la ventana, o recargar la pagina, ya que se perdera tu progreso, comprueba que tu conexión es estable y recuerda que hasta no llegar al final tus respuestas no seran registradas.</p>
+				          <p align="center" style="text-align: justify;" class="h2 font-weight-bold text-primary m-3">Contesta con la mayor sinceridad posible recuerda que tu opinión hace la diferencia</p>
+				          <p align="center"  style="text-align: justify;" class="h2 text-danger m-3">Una vez comenzada la encuesta, procura no cerrar la ventana, o recargar la pagina, ya que se perderá tu progreso, comprueba que la conexión es estable y recuerda que hasta llegar al final tus respuestas seran registradas.</p>
 				          <div class="row">
 				            <div class="col-3"></div>
 				            <div class="col-6">
@@ -63,7 +64,7 @@ require_once ("departamento.lib.php");
 			$alumnos = $encuesta->estadoEncuestaAlumno();
 			$p = $encuesta->getPorcentajeEncuestas();
 				echo '<div class="row">
-					<div class="col-md-6"><label class="display-4 text-primary">Estado Encuesta Alumno</label></div>
+					<div class="col-md-6"><label class="display-4 text-success">Estado Encuesta Alumno <i class="fas fa-chart-pie"></i> </label></div>
 					<div class="col-md-6" id="grafico" style="width: 400px; height: 250px;">
 					</div>
 				</div>
@@ -89,7 +90,7 @@ require_once ("departamento.lib.php");
 			$departamentos= $dep->getDepartamentos();
 				echo '<div class="row">
 					<div class="col-md-12">
-					<label class="display-4">Departamentos</label>
+					<label class="display-4 text-success">Departamentos <i class="fas fa-chart-bar"></i> </label>
 					</div>
 					<div class="row">
 					<div class="col-md-12">
@@ -104,7 +105,7 @@ require_once ("departamento.lib.php");
 				</div></div>';
 				break;
 				case 'nuevodepartamento':
-					echo '<label class="display-4 text-success">Nuevo Departamento</label>
+					echo '<label class="display-4 text-success">Nuevo Departamento <i class="fas fa-plus"></i></label>
 					<form action="javascript:nuevoDepartamento();">
 						<div class="col-md-4 h3">Nombre:</div>
 						<div class="col-md-12"><input type="text" class="form-control" id="nombre_departamento"></div>
@@ -167,7 +168,7 @@ require_once ("departamento.lib.php");
 					</form>';
 					break;
 				case 'nuevaPregunta':
-					echo '<label class="display-4 text-dark">Nueva Pregunta</label>
+					echo '<label class="display-4 text-success">Nueva Pregunta <i class="fas fa-plus"></i></label>
 							<form action="javascript:guardarNuevaPregunta(\''.$_POST['id'].'\',\''.$_POST['nombredep'].'\',\''.$_POST['dep'].'\');" id="form-nueva-pregunta"> <input type="text" class="form-control my-2" style="background:#EFEFEF" id="nueva_pregunta">
 							<input type="submit" class="btn btn-success" value="Guardar">
 							<input type="button" class="btn btn-danger" value="Cancelar" onclick="javascript:mostrarVistaDepartamento(\''.$_POST['id'].'\',\''.$_POST['nombredep'].'\',\''.$_POST['dep'].'\');">
@@ -178,7 +179,7 @@ require_once ("departamento.lib.php");
 					<div class="container" >
 						<div class="row">
 							<div class="col-md-12">
-								<label class="display-4 text-primary">Reportes</label>
+								<label class="display-4 text-success">Reportes <i class="fas fa-clipboard-check"></i></label>
 							</div>
 						</div>
 						<br><br>
@@ -200,15 +201,93 @@ require_once ("departamento.lib.php");
 					</div>';
 				break;
 			case 'configuracion':
-				echo '<label class="display-4 text-success">Configuración</label>
+				echo '<label class="display-4 text-success">Configuración <i class="fas fa-cogs"></i></label>
 					<div class="row m-3">
-						<div class="col-md-5 m-3 btn btn-info"><label class="h2 text-white" align="left">Configurar Periodo de Encuesta Activa</label></div>
-						<div class="col-md-5 m-3 btn btn-success"><label class="h2 text-white" align="left">Cambiar Informacion del Administrador</label></div>
+						<div class="col-md-5 m-3 btn btn-info animated bounceInDown" onclick="javascript:mostrarVista(\'admin\',\'configurarPeriodo\');"><label class="h2 text-white" align="left">Configurar Periodo de Encuesta Activa <i class="fas fa-clock"></i></label></div>
+						<div class="col-md-5 m-3 btn btn-success animated bounceInRight" onclick="javascript:mostrarVista(\'admin\',\'configurarInfo\');"><label class="h2 text-white" align="left">Cambiar Informacion del Administrador <i class="fas fa-users-cog"></i></label></div>
 					</div>
 					<div class="row m-3">
-						<div class="col-md-5 m-3 btn btn-warning"><label class="h2 text-white" align="left">Cargar nueva matricula de alumnos</label></div>
-						<div class="col-md-5 m-3 btn btn-danger"><label class="h2 text-white" align="left">Reiniciar Datos del Sistema</label></div>
+						<div class="col-md-5 m-3 btn btn-warning animated bounceInLeft" onclick="javascript:mostrarVista(\'admin\',\'cargarMatricula\');"><label class="h2 text-white" align="left">Cargar matricula de alumnos <i class="fas fa-list-ol"></i></label></div>
+						<div class="col-md-5 m-3 btn btn-danger animated  bounceInUp" onclick="javascript:reiniciarSistema();"><label class="h2 text-white" align="left">Reiniciar Datos del Sistema <i class="fas fa-sync-alt"></i></label></div>
 					</div>';
+				break;
+			case 'configurarPeriodo':
+				echo '<label class="display-4 text-success">Configuar Periodo de Encuesta Activa <i class="fas fa-clock"></i></label>
+				<form>
+				<div class="row">
+					<div class="col-md-6">
+						<label class="h2">Inicio:</label>
+						<input type="date"  class="form-control" id="fechainicio">
+					</div>
+					<div class="col-md-6">
+						<label class="h2">Fin:</label>
+						<input type="date" class="form-control" id="fechafin">
+					</div>
+				</div>
+				<div class="row my-3">
+				<input type="submit" class="btn btn-success m-2" value="Guardar">
+				<input type="button" class="btn btn-danger m-2" onclick="javascript:mostrarVista(\'admin\',\'configuracion\');" value="Cancelar">
+				</div>
+				</form>';
+				break;
+			case 'configurarInfo':
+				echo '<label class="display-4 text-success" align="left">Cambiar Informacion del Administrador <i class="fas fa-users-cog"></i></label>
+				<form>
+				<div class="row">
+					<div class="col-md-6">
+						<label class="h2">Nombre Del Administrador:</label>
+						<input type="text" class="form-control" value="'.$_SESSION['admin']['nombre'].'">
+					</div>
+					<div class="col-md-6">
+						<label class="h2">Contraseña Actual:</label>
+						<input type="password" class="form-control">
+					</div>
+				</div>
+				<div class="row my-2">
+					<div class="col-md-6">
+						<label class="h2">Contraseña Nueva:</label>
+						<input type="password" class="form-control">
+					</div>
+					<div class="col-md-6">
+						<label class="h2">Confirme Contraseña:</label>
+						<input type="password" class="form-control">
+					</div>
+				</div>
+				<div class="row">
+					<input type="submit" class="btn btn-success m-2" value="Guardar">
+				<input type="button" class="btn btn-danger m-2" onclick="javascript:mostrarVista(\'admin\',\'configuracion\');" value="Cancelar">
+				</div>
+				</form>';
+				break;
+			case 'cargarMatricula':
+				echo '<label class="display-4 text-success" align="left">Cargar matricula de alumnos <i class="fas fa-list-ol"></i></label>
+					<form>
+						<div class="row">
+							<div class="col-md-12">
+							<label class="h3">Seleccione un archivo con extension .csv con el siguiente formato:</label>
+							<table class="table table-striped">
+							<tr class="bg-dark text-white">
+							<td>id</td><td>NoControl</td><td>Apellido Paterno</td><td>Apellido Materno</td><td>Nombre</td><td>Carrera</td><td>Semestre</td><td>Estatus_enc</td>
+							</tr>
+							<tr>
+							<td>1</td><td>16650286</td><td>Quiroz</td><td>Quiroz</td><td>Brandon</td><td>Ingenieria En Sistemas Computacionales</td><td>8</td><td>1</td>
+							</tr>
+							</table>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+							<label class="h3">Seleccione un Archivo:</label>
+							</div>
+							<div class="col-md-6">
+							<input type="file" id="matricula" name="matricula" class="form-control">
+							</div>
+						</div>
+						<div class="row">
+							<input type="submit" class="btn btn-success m-2" value="Cargarr">
+							<input type="button" class="btn btn-danger m-2" onclick="javascript:mostrarVista(\'admin\',\'configuracion\');" value="Cancelar">
+						</div>
+					</form>';
 				break;
 		}
 		break;

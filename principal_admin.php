@@ -31,23 +31,23 @@
 	        </button>
         </div>
 				<div class="p-4 pt-5">
-		  		<h3><a class="logo"><?php echo $_SESSION["admin"]["nombre"]?></a></h3>
+		  		<h3><i class="fas fa-user-shield text-white"></i><br><a class="logo"><?php echo $_SESSION["admin"]["nombre"]?></a></h3>
 	        <ul class="list-unstyled components mb-5">
 	          
 	          <li>
-	              <a style="cursor: pointer;" onclick="mostrarVistaAlumnos('admin','alumnos');">Alumnos</a>
+	              <a style="cursor: pointer;" onclick="mostrarVistaAlumnos('admin','alumnos');"><i class="fas fa-chart-pie"></i> Estado De La Encuesta</a>
 	          </li>
 	          <li>
-              	<a style="cursor: pointer;" onclick="mostrarVista('admin','departamentos');">Departamentos</a>
+              	<a style="cursor: pointer;" onclick="mostrarVista('admin','departamentos');"><i class="fas fa-chart-bar"></i> Departamentos</a>
 	          <li>
 	          <li>
-	              <a style="cursor: pointer;" onclick="mostrarVista('admin','reportes');">Reportes</a>
+	              <a style="cursor: pointer;" onclick="mostrarVista('admin','reportes');"><i class="fas fa-clipboard-check"></i> Reportes</a>
 	          </li>
 	          <li>
-	              <a style="cursor: pointer;" onclick="mostrarVista('admin','configuracion');">Configuración</a>
+	              <a style="cursor: pointer;" onclick="mostrarVista('admin','configuracion');"><i class="fas fa-cogs"></i> Configuración</a>
 	          </li>
 	          <li>
-             	 <a style="cursor: pointer;" onclick="cerrarAdmi();" >Cerrar Sesión</a>
+             	 <a style="cursor: pointer;" onclick="cerrarAdmi();" ><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
 	          </li>
 	        </ul>
 
@@ -78,6 +78,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="js/funciones.js"></script>
 	<script type ="text/javascript" src="js/sweetalert2.all.min.js"></script>
+	<script src="https://kit.fontawesome.com/b2c84686c6.js" crossorigin="anonymous"></script>
   </body>
 </html>
 <?php	

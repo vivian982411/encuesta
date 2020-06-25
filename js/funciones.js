@@ -953,3 +953,10 @@ function generarXLS(id, nombredep) {
             console.log("complete");
         });
 }
+function reiniciarSistema(){
+    Swal.fire({
+                title: 'Advertencia',
+                text: 'No utilice esta opción a menos que ya se halla concluido con la encuesta y respaldado sus datos',
+                icon: 'warning',
+            });
+}
