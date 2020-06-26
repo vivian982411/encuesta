@@ -3,7 +3,7 @@
 	class Conexion{
 		private $con;
 		function open(){
-			$this->con = new mysqli("teds.mx","estudiante","JYh4sp5Me6","programacion_servidor");
+			$this->con = new mysqli("itzitacuaro.edu.mx","itzitacu_encuestaAdm","BwSEwtK0KP","itzitacu_encuesta");
 			if (mysqli_connect_errno()) {
 				exit();
 			}
