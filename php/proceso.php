@@ -24,7 +24,7 @@ require_once 'departamento.lib.php';
 								<div class='col-md-1'></div>
 								<div class='col-md-10'>
 									<label class='display-4 text-dark m-5'>@".$_SESSION['alumno']['nombre']."</label><br>
-									<label class='h1 text-success'>Gracias por tu tiempo, opinión y comentarios</label>
+									<label class='h1 text-success'>Gracias por tu tiempo.</label>
 									<div class='row'>
 										<div class='col-md-3'></div>
 										<div class='col-md-6'>
@@ -44,27 +44,31 @@ require_once 'departamento.lib.php';
 	case 'alumno':
 		switch ($_POST['acc']) {
 			case 'login':
-			$alu = new Alumno();
-			$verificacion=$alu->verificarEncuesta($_POST['nocontrol']);
-			if($verificacion == $_POST['nocontrol']){
-				echo "verificado"; 
-			}else{
-				$alumno = $alu->getAlumno($_POST['nocontrol']);
-				if ($alumno=="error") {
-					echo "error";
+				$alu = new Alumno();
+				if($alu->verificarPeriodo()){
+					$verificacion=$alu->verificarEncuesta($_POST['nocontrol']);
+					if($verificacion == $_POST['nocontrol']){
+						echo "verificado"; 
+					}else{
+						$alumno = $alu->getAlumno($_POST['nocontrol']);
+						if ($alumno=="error") {
+							echo "error";
+						}else{
+						$datos = explode("|",$alumno);
+						$nombre = $datos[1];
+						$nocontrol = $datos[0];
+						if ($nocontrol == $_POST['nocontrol']) {
+							$_SESSION["alumno"]["nocontrol"] = $nocontrol;
+							$_SESSION["alumno"]["nombre"] = $nombre;
+							echo "ok";
+						}else{
+							echo "error";
+						}
+						}
+					}
 				}else{
-				$datos = explode("|",$alumno);
-				$nombre = $datos[1];
-				$nocontrol = $datos[0];
-				if ($nocontrol == $_POST['nocontrol']) {
-					$_SESSION["alumno"]["nocontrol"] = $nocontrol;
-					$_SESSION["alumno"]["nombre"] = $nombre;
-					echo "ok";
-				}else{
-					echo "error";
+					echo "periodo";
 				}
-				}
-			}
 				break;
 			case 'logout':
 				session_destroy();
@@ -73,9 +77,9 @@ require_once 'departamento.lib.php';
 		}
 		break;
 	case 'admin':
+		$admin=new Administrador();
 		switch ($_POST['acc']) {
 			case 'login':
-			$admin=new Administrador();
 			$verificacion=$admin->getAdmin($_POST['usuario'],$_POST['password']);
 			if ($verificacion!="error") {
 				$datos = explode("|",$verificacion);
@@ -97,8 +101,8 @@ require_once 'departamento.lib.php';
 				$contenido='Solicitudes';
 				echo $contenido;
 				break;
-			case 'variable':
-				# code...
+			case 'configurarPeriodo':
+				echo $admin->configurarPeriodo($_POST['fechai'],$_POST['fechaf']);
 				break;
 		}
 		break;

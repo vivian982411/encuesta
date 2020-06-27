@@ -43,7 +43,7 @@ require_once ("departamento.lib.php");
 							</div>
 							<div class="col-md-1"></div>
 							</div>
-				          <p align="left" class="h3 m-3" style="text-align: justify;">2. Si desea expresar algún comentario, sugerencia,recomendación o queja utilice el espacio destinado para ello.</p>
+				          <p align="left" class="h3 m-3" style="text-align: justify;">2. Si desea expresar algún comentario, sugerencia, recomendación o queja utilice el espacio destinado para ello.</p>
 				          <br><br>
 				          <p align="center" style="text-align: justify;" class="h2 font-weight-bold text-primary m-3">Contesta con la mayor sinceridad posible recuerda que tu opinión hace la diferencia</p>
 				          <p align="center"  style="text-align: justify;" class="h2 text-danger m-3">Una vez comenzada la encuesta, procura no cerrar la ventana, o recargar la pagina, ya que se perderá tu progreso, comprueba que la conexión es estable y recuerda que hasta llegar al final tus respuestas seran registradas.</p>
@@ -213,7 +213,7 @@ require_once ("departamento.lib.php");
 				break;
 			case 'configurarPeriodo':
 				echo '<label class="display-4 text-success">Configuar Periodo de Encuesta Activa <i class="fas fa-clock"></i></label>
-				<form>
+				<form action="javascript:configurarPeriodo();" id="form-configurar">
 				<div class="row">
 					<div class="col-md-6">
 						<label class="h2">Inicio:</label>

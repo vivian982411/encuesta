@@ -18,5 +18,10 @@ require_once 'conexion.php';
 			}
 			return utf8_encode($adm);
 		}
+		function configurarPeriodo($inicio,$fin){
+			$q="UPDATE  periodo SET fechaini_per='$inicio', fechafin_per='$fin' WHERE id_per='1';";
+			$query = $this->select($q);
+			return "ok";		
+		}
 	}
 ?>

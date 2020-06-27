@@ -90,7 +90,13 @@ function verificaLog() {
                     text: 'Tu ya has contestado la encuesta',
                     icon: 'success',
                 });
-            } else if (info == "error") {
+            } else if (info == "periodo") {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'El periodo para responder encuestas no esta disponible.',
+                    icon: 'error',
+                });
+            } else {
                 Swal.fire({
                     title: 'Error al iniciar sesion',
                     text: 'El numero de control no existe',
@@ -812,8 +818,8 @@ function crearEncuesta(id) {
             var comentario = document.createElement("div");
             comentario.setAttribute("class", "card m-5 p-2");
             var com = document.createElement("label");
-            com.setAttribute("class", "display-4 text-dark m-2");
-            com.innerHTML = "Comentario"
+            com.setAttribute("class", "h1 text-dark m-2");
+            com.innerHTML = "Comentario, sugerencia, recomendación o queja: "
             var texto = document.createElement("input");
             texto.setAttribute("type", "textarea");
             texto.setAttribute("id", "comentario");
@@ -953,10 +959,54 @@ function generarXLS(id, nombredep) {
             console.log("complete");
         });
 }
-function reiniciarSistema(){
+
+function reiniciarSistema() {
     Swal.fire({
-                title: 'Advertencia',
-                text: 'No utilice esta opción a menos que ya se halla concluido con la encuesta y respaldado sus datos',
-                icon: 'warning',
+        title: 'Advertencia',
+        text: 'No utilice esta opción a menos que ya se halla concluido con la encuesta y respaldado sus datos',
+        icon: 'warning',
+    });
+}
+
+function configurarPeriodo() {
+    var f = document.querySelector("#form-configurar");
+    console.log(f.fechainicio.value + " y " + f.fechafin.value);
+    $.ajax({
+            url: 'php/proceso.php',
+            type: 'POST',
+            dataType: 'html',
+            data: {
+                opc: 'admin',
+                acc: 'configurarPeriodo',
+                fechai: f.fechainicio.value,
+                fechaf: f.fechafin.value
+            },
+        })
+        .done(function(info) {
+            console.log(info);
+            if (info == "ok") {
+                Swal.fire({
+                    title: 'Actualizado',
+                    text: 'El periodo para responder la encuesta ha sido actualizado.',
+                    icon: 'success',
+                });
+                mostrarVista('admin', 'configuracion');
+            } else {
+                Swal.fire({
+                    title: 'Error al actualizar el periodo',
+                    text: 'Ocurrió un error al configurar el periodo',
+                    icon: 'error',
+                });
+            }
+        })
+        .fail(function() {
+            Swal.fire({
+                title: 'Error al conectar con el servidor',
+                text: 'Revise su conexion o intente mas tarde',
+                icon: 'error',
             });
+        })
+        .always(function() {
+            console.log("complete");
+        });
 }

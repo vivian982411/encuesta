@@ -29,5 +29,17 @@ require_once 'conexion.php';
 			$verificado= $ren['nocontrol_alu'];
 			return $verificado;
 		}
+		function verificarPeriodo(){
+			$query = $this->select("SELECT * FROM periodo;");
+			$ren = $query->fetch_array();
+			$fecha_inicio = $ren['fechaini_per'];
+			$fecha_fin =  $ren['fechafin_per'];
+			$fecha = date("Y-m-d");
+			if(($fecha >= $fecha_inicio) && ($fecha <= $fecha_fin)) {  
+				return true;	   
+			} else {
+				return false;		   
+			}
+		}
 	}
 ?>
