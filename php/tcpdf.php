@@ -2,32 +2,8 @@
 
 require_once('tcpdf/tcpdf.php');
 require_once ('departamento.lib.php');
-$nombre="";
-switch ($_GET['id']) {
-	case '1':
-		$nombre="Centro de Información";
-		break;
-	case '2':
-		$nombre="Coordinación de Carreras";
-		break;
-	case '3':
-		$nombre="Recursos Financieros";
-		break;
-	case '4':
-		$nombre="Residencias Profesionales";
-		break;
-	case '5':
-		$nombre="Centro de Cómputo";
-		break;
-	case '6':
-		$nombre="Servicios Escolares";
-		break;
-	case '7':
-		$nombre="Servicio Social";
-		break;
-	
-}
-
+require_once('encuesta.lib.php');
+$nombre=$_GET['nombre'];
 $dep = new Departamento();
 
 // create new PDF document
@@ -35,37 +11,37 @@ class EDITPDF extends TCPDF {
 
     //Page header
     public function Header() {
-        // Logo
-    	$origen = "../img/petirrojos.jpg";
+		// Logo
+		$encuesta=new Encuesta();
+		$fecha=explode("|",$encuesta->getPeriodo());
+		$fechai=date_format(new DateTime($fecha[0]), 'd/m/Y');
+		$fechaf=date_format(new DateTime($fecha[1]), 'd/m/Y');
+		$origen1 = "../img/logoTec.jpg";
+		$origen2 = "../img/sep.jpg";
 		$destino = '../img/';
-		copy($origen, $destino."logo.jpg");
-        $image_file = '../img/logo.jpg';
+		copy($origen1, $destino."logo1.jpg");
+		copy($origen2, $destino."logo2.jpg");
+		$image_file1 = '../img/logo1.jpg';
+		$image_file2 = '../img/logo2.jpg';
         $this->SetFont('helvetica', 'B', 18);
         $head='<table>
         	   		<tr>
-        	   			<td width="70"><img src="'.$image_file.'" width="50" height="50"></td>
-        	   			<td width="570" align="center"><h2  align="center">Instituto Tecnológico de Zitácuaro</h2></td>
+        	   			<td width="70"><img src="'.$image_file2.'" width="70" height="50"></td>
+						<td width="500" align="center"><h2  align="center">Instituto Tecnológico de Zitácuaro</h2></td>
+						<td width="70"><img src="'.$image_file1.'" width="50" height="50"></td>
         	   		</tr>
         	   		<tr>
         	   			<td width="70"></td>
-        	   			<td align="center"><h5 align="center">Subdirección de Planeación</h5></td>
+						<td align="center"><h5 align="center">Subdirección de Planeación</h5></td>
+						<td width="70"></td>
         	   		</tr>
         	   		<tr>
         	   			<td width="70"></td>
-        	   			<td align="center"><h4  align="center">Evaluación departamental [periodo]</h4></td>
+						<td align="center"><h4  align="center">Evaluación departamental del '.$fechai.' al '.$fechaf.'</h4></td>
+						<td width="70"></td>
         	   		</tr>
         	   	</table>';
         $this->writeHTML($head);
-        // Title
-        /*$this->SetXY(0, 15);
-        $this->Cell(0, 15, 'Instituto Tecnológico de Zitácuaro', 0, false, 'C', 0, '', 0, false, 'M', 'M');
-        $this->SetXY(0, 25);
-        $this->SetFont('helvetica', 'B', 12);
-        $this->Cell(0, 15, 'Subdirección de Planeación', 0, false, 'C', 0, '', 0, false, 'M', 'M');
-        $this->SetXY(0, 35);
-        $this->SetFont('helvetica', 'B', 14);
-        $this->Cell(0, 15, 'Evaluación departamental [periodo]', 0, false, 'C', 0, '', 0, false, 'M', 'M');*/
-        
     }
 
     // Page footer
@@ -83,10 +59,10 @@ class EDITPDF extends TCPDF {
 $pdf = new EDITPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Nicola Asuni');
-$pdf->SetTitle('TCPDF Example 001');
-$pdf->SetSubject('TCPDF Tutorial');
-$pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+$pdf->SetAuthor('Subdirección de Planeación ITZ');
+$pdf->SetTitle('Comentarios Depto. '.$nombre);
+$pdf->SetSubject('Comentarios emitidos en la evaluación departamental: '.$nombre);
+$pdf->SetKeywords('comentarios, PDF, evaluacion, departamental, departamento');
 
 // set default header data
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
@@ -145,7 +121,7 @@ foreach ($comentario as $com) {
 $html.='		</tbody>
 	</table>';
 $pdf->writeHTML($html);
-$pdf->Output('ComentariosDepartamento.pdf', 'I');
+$pdf->Output('Comentarios_Departamento_'.$nombre.'.pdf', 'I');
 
 ?>
 

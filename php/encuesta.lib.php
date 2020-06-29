@@ -5,6 +5,11 @@ require_once "conexion.php";
 		function __construct(){
 			$this->open();
 		}
+		function getPeriodo(){
+			$con = $this->select("SELECT * FROM periodo");
+			$ren = $con->fetch_array();
+			return utf8_encode($ren['fechaini_per']."|".$ren['fechafin_per']);
+		}
 		function getDepartamento($id){
 			//echo $id;
 			$con = $this->select("SELECT count(id_dep) as cuenta FROM departamento");
