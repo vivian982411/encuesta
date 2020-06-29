@@ -319,7 +319,7 @@ function mostrarVistaDepartamento(id, nombredep, dep) {
             div.setAttribute("class", "text-primary");
             var btn2 = document.createElement("input");
             btn2.setAttribute("type", "button");
-            btn2.setAttribute("onclick", "generarPDF(" + id + ")");
+            btn2.setAttribute("onclick", "generarPDF(" + id + ",'" + dep + "')");
             btn2.setAttribute("class", "btn btn-info");
             btn2.setAttribute("style", "float:rigth");
             btn2.setAttribute("value", "Exportar a pdf");
@@ -504,9 +504,9 @@ function guardarPregunta(e, id, dep) {
     }
 }
 
-function generarPDF(id) {
-    console.log("GenerarPDF de:" + id);
-    window.open("php/tcpdf.php?id=" + id)
+function generarPDF(id, nombre_departamento) {
+    console.log("GenerarPDF de:" + nombre_departamento);
+    window.open("php/tcpdf.php?id=" + id + "&nombre=" + nombre_departamento)
 }
 
 function modificarPregunta(id) {

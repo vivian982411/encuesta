@@ -4,6 +4,7 @@
 		private $con;
 		function open(){
 			$this->con = new mysqli("itzitacuaro.edu.mx","itzitacu_encuestaAdm","BwSEwtK0KP","itzitacu_encuesta");
+			//$this->con = new mysqli("localhost","root","","encuestas");
 			if (mysqli_connect_errno()) {
 				exit();
 			}
