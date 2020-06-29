@@ -1,9 +1,1 @@
-<files .htaccess>
-
-order allow,deny
-
-deny from all
-
-</files>
-deny from all
-IndexIgnore *
+Options -Indexes
