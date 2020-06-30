@@ -578,7 +578,8 @@ function validarEncuesta(id, max) {
 }
 
 function crearEncuesta(id) {
-    var valorInputPreguntas = $("#preguntas").val();
+    var valorInputPreguntas = $("#preguntas").val() === undefined ? "" : $("#preguntas").val();
+
     console.log("Este es el valor de preguntas: " + valorInputPreguntas);
     var dep = "";
     var dep1 = "";
