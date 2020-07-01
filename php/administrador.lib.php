@@ -1,13 +1,9 @@
 <?php 
 require_once 'conexion.php';
-	/**
-	 * 
-	 */
 	class Administrador extends Conexion
 	{
 		
-		function __construct()
-		{
+		function __construct(){
 			$this->open();
 		}
 		function getAdmin($usuario,$pass){
@@ -22,6 +18,16 @@ require_once 'conexion.php';
 			$q="UPDATE  periodo SET fechaini_per='$inicio', fechafin_per='$fin' WHERE id_per='1';";
 			$query = $this->select($q);
 			return "ok";		
+		}
+		function actualizarNombre($id,$nombre){
+			$q="UPDATE  administrador SET nombre_adm='$nombre' WHERE id_adm='$id';";
+			$query = $this->select($q);
+			return "ok";
+		}
+		function actualizarPassword($id,$pass){
+			$q="UPDATE  administrador SET pass_adm='$pass' WHERE id_adm='$id';";
+			$query = $this->select($q);
+			return "ok";			
 		}
 	}
 ?>

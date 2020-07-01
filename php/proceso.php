@@ -84,10 +84,11 @@ require_once 'departamento.lib.php';
 			if ($verificacion!="error") {
 				$datos = explode("|",$verificacion);
 				$nombre = $datos[1];
-				
+				$pass=$datos[3];
 				$id = $datos[0];
 				$_SESSION["admin"]["nombre"] = $nombre;
 				$_SESSION["admin"]["id"] = $id;
+				$_SESSION["admin"]["pass"] = $pass;
 				echo "ok";
 			}else{
 				echo "error";
@@ -104,6 +105,25 @@ require_once 'departamento.lib.php';
 			case 'configurarPeriodo':
 				echo $admin->configurarPeriodo($_POST['fechai'],$_POST['fechaf']);
 				break;
+			case 'actualizarDatos':
+				if (strcmp($_POST['pass'],$_SESSION["admin"]["pass"])=== 0) {
+					if (strlen($_POST['nombre'])>1) {
+						$admin->actualizarNombre($_SESSION["admin"]["id"],$_POST['nombre']);
+						$_SESSION["admin"]["nombre"]=$_POST['nombre'];
+					}
+					if(empty($_POST['pass1']) && empty($_POST['pass1'])){
+						echo 'ok';
+					}else if(strcmp($_POST['pass1'],$_POST['pass2']) === 0){
+						$admin->actualizarPassword($_SESSION["admin"]["id"],$_POST['pass1']);
+						$_SESSION["admin"]["pass"]=$_POST['pass1'];
+						echo 'ok';
+					}else{
+						echo 'error';
+					}
+				}else {
+					echo 'pass';
+				}
+				break;
 		}
 		break;
 	case 'departamentos':
@@ -119,7 +139,7 @@ require_once 'departamento.lib.php';
 				break;
 			case 'showdepartamentosreporte':
 				$dep= new Departamento();
-				echo $dep->getDepartamentosReporte();
+				echo utf8_encode($dep->getDepartamentosReporte());
 				break;
 			case 'generarXLS':
 				$dep = new Departamento();

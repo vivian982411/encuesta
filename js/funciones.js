@@ -971,7 +971,7 @@ function reiniciarSistema() {
 
 function configurarPeriodo() {
     var f = document.querySelector("#form-configurar");
-    console.log(f.fechainicio.value + " y " + f.fechafin.value);
+    //console.log(f.fechainicio.value + " y " + f.fechafin.value);
     $.ajax({
             url: 'php/proceso.php',
             type: 'POST',
@@ -1010,4 +1010,75 @@ function configurarPeriodo() {
         .always(function() {
             console.log("complete");
         });
+}
+
+async function actualizaDatosAdmin() {
+    var f = document.querySelector("#form-datos");
+    const { value: password } = await Swal.fire({
+        title: 'Ingresa tu contraseña',
+        input: 'password',
+        inputPlaceholder: 'Ingresar contraseña',
+        inputAttributes: {
+            maxlength: 10,
+            autocapitalize: 'off',
+            autocorrect: 'off'
+        }
+    });
+
+    if (password) {
+        //Swal.fire(`Entered password: ${password}`)
+        console.log(password);
+        $.ajax({
+                url: 'php/proceso.php',
+                type: 'POST',
+                dataType: 'html',
+                data: {
+                    opc: 'admin',
+                    acc: 'actualizarDatos',
+                    pass: password,
+                    nombre: f.nombre.value,
+                    pass1: f.pass1.value,
+                    pass2: f.pass2.value
+                },
+            })
+            .done(function(info) {
+                console.log(info);
+                if (info == 'ok') {
+                    Swal.fire({
+                        title: 'Actualizado',
+                        text: 'El periodo para responder la encuesta ha sido actualizado.',
+                        icon: 'success',
+                    });
+                    mostrarVista('admin', 'configuracion');
+                } else if (info == 'pass') {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'La contraseña no es correcta',
+                        icon: 'error',
+                    });
+                } else if (info == 'error') {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'La nueva contraseña ingresada no es la misma en ambos campos. Intente de nuevo',
+                        icon: 'error',
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Ha ocurrido un error',
+                        icon: 'error',
+                    });
+                }
+            })
+            .fail(function() {
+                Swal.fire({
+                    title: 'Error al conectar con el servidor',
+                    text: 'Revise su conexion o intente mas tarde',
+                    icon: 'error',
+                });
+            })
+            .always(function() {
+                console.log("complete");
+            });
+    }
 }

@@ -184,14 +184,14 @@ require_once ("departamento.lib.php");
 						</div>
 						<br><br>
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-5">
 								<button type="button" onclick="javascript:showDepartamentos();" class="btn btn-info btn-lg m-1 animated bounceInRight btn-block">Reporte Por Departamento</button>
 								
 							</div>
-							<div class="col-md-3"> 
+							<div class="col-md-5"> 
 								<button type="button" onclick="javascript:generarXLS(\'general\',\'general\');" class="btn btn-secondary btn-lg m-1 animated bounceInLeft btn-block">Generar Reporte General</button>
 							</div>
-							<div class="col-md-6"> </div>
+							<div class="col-md-2"> </div>
 						</div>
 						<br>
 						<div class="row">
@@ -232,25 +232,27 @@ require_once ("departamento.lib.php");
 				break;
 			case 'configurarInfo':
 				echo '<label class="display-4 text-success" align="left">Cambiar Informacion del Administrador <i class="fas fa-users-cog"></i></label>
-				<form>
+				<form id="form-datos" action="javascript:actualizaDatosAdmin();">
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-12">
 						<label class="h2">Nombre Del Administrador:</label>
-						<input type="text" class="form-control" value="'.$_SESSION['admin']['nombre'].'">
+						<input type="text" id="nombre" class="form-control" value="'.$_SESSION['admin']['nombre'].'">
 					</div>
-					<div class="col-md-6">
-						<label class="h2">Contraseña Actual:</label>
-						<input type="password" class="form-control">
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-12">
+						<label class="h2">Cambiar contraseña:</label>
 					</div>
 				</div>
 				<div class="row my-2">
 					<div class="col-md-6">
 						<label class="h2">Contraseña Nueva:</label>
-						<input type="password" class="form-control">
+						<input id="pass1" type="password" class="form-control">
 					</div>
 					<div class="col-md-6">
 						<label class="h2">Confirme Contraseña:</label>
-						<input type="password" class="form-control">
+						<input id="pass2" type="password" class="form-control">
 					</div>
 				</div>
 				<div class="row">
@@ -284,7 +286,7 @@ require_once ("departamento.lib.php");
 							</div>
 						</div>
 						<div class="row">
-							<input type="submit" class="btn btn-success m-2" value="Cargarr">
+							<input type="submit" class="btn btn-success m-2" value="Cargar">
 							<input type="button" class="btn btn-danger m-2" onclick="javascript:mostrarVista(\'admin\',\'configuracion\');" value="Cancelar">
 						</div>
 					</form>';
