@@ -143,7 +143,7 @@ require_once 'departamento.lib.php';
 				break;
 			case 'generarXLS':
 				$dep = new Departamento();
-				if ($_POST['dep']=='general') {
+				if ($_POST['dep']=='General') {
 					echo $dep->generarXLSGeneral();
 				}else{
 					echo $dep->generarXLS($_POST['dep'],$_POST['nombredep']);

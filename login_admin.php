@@ -25,7 +25,7 @@ session_start();
  				<div class="row">
  					<div class="col-12">
  						<center><label class="display-4 text-white my-5">Encuesta de Satisfacción</label></center>
- 						<center><img src="img/petirrojos.png" class="img-fluid" width="50%" style="float: center"></center>
+ 						<center><img src="img/petirrojos.png" class="img-fluid" id="peti" width="50%" style="float: center" onclick="javascript:usuario();"></center>
  					</div>
  				</div>
  			</div>

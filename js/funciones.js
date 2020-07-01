@@ -2,6 +2,10 @@ function administrador() {
     window.location = "login_admin.php";
 }
 
+function usuario() {
+    window.location = "index.php";
+}
+
 function verificaAdmin() {
     var f = document.querySelector("#form-login-admin");
     $.ajax({

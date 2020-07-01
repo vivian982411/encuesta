@@ -185,11 +185,10 @@ require_once ("departamento.lib.php");
 						<br><br>
 						<div class="row">
 							<div class="col-md-5">
-								<button type="button" onclick="javascript:showDepartamentos();" class="btn btn-info btn-lg m-1 animated bounceInRight btn-block">Reporte Por Departamento</button>
-								
+								<button type="button" onclick="javascript:showDepartamentos();" class="btn btn-primary btn-lg m-1 animated bounceInRight btn-block">Reporte Por Departamento</button>			
 							</div>
 							<div class="col-md-5"> 
-								<button type="button" onclick="javascript:generarXLS(\'general\',\'general\');" class="btn btn-secondary btn-lg m-1 animated bounceInLeft btn-block">Generar Reporte General</button>
+								<button type="button" onclick="javascript:generarXLS(\'General\',\'General\');" class="btn btn-secondary btn-lg m-1 animated bounceInLeft btn-block">Generar Reporte General</button>
 							</div>
 							<div class="col-md-2"> </div>
 						</div>

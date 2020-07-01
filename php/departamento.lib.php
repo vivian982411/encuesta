@@ -75,7 +75,7 @@ require_once 'excelwriter.inc.php';
 		echo $excel->error;
 		die;
 		}
-		$myArr= array("","",utf8_encode("Instituto Tecnológico de Zitácuaro"));
+		$myArr= array("","","Instituto Tecnológico de Zitácuaro");
 		$excel->writeLine($myArr,array("text-align"=>"center",'font-size'=>"25px","font-weight"=>"bolder"));
 
 		$myArr= array("","","Subdirección de Planeación");
@@ -126,7 +126,7 @@ require_once 'excelwriter.inc.php';
 			$cad="SELECT nom_dep as departamento, preguntadepartamento.num_predep as Nopregunta, pre_predep as pregunta,(SELECT COUNT(res_resenc) FROM respuestaencuesta WHERE res_resenc='1' and num_predep=Nopregunta) as terrible,(SELECT COUNT(res_resenc) FROM respuestaencuesta WHERE res_resenc='2' and num_predep=Nopregunta) as malo,(SELECT COUNT(res_resenc) FROM respuestaencuesta WHERE res_resenc='3' and num_predep=Nopregunta) as regular,(SELECT COUNT(res_resenc) FROM respuestaencuesta WHERE res_resenc='4' and num_predep=Nopregunta) as bueno,(SELECT COUNT(res_resenc) FROM respuestaencuesta WHERE res_resenc='5' and num_predep=Nopregunta) as excelente FROM departamento join preguntadepartamento on departamento.id_dep=preguntadepartamento.id_dep join respuestaencuesta on respuestaencuesta.num_predep=preguntadepartamento.num_predep WHERE departamento.id_dep='".$id."' GROUP BY respuestaencuesta.num_predep";
 			$res= $this->select($cad);
 
-			$myArr= array("","",utf8_encode("Instituto Tecnológico de Zitácuaro"));
+			$myArr= array("","","Instituto Tecnológico de Zitácuaro");
 			$excel->writeLine($myArr,array("text-align"=>"center",'font-size'=>"25px","font-weight"=>"bolder"));
 
 			$myArr= array("","","Subdirección de Planeación");
