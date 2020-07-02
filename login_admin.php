@@ -25,13 +25,13 @@ session_start();
  				<div class="row">
  					<div class="col-12">
  						<center><label class="display-4 text-white my-5">Encuesta de Satisfacción</label></center>
- 						<center><img src="img/petirrojos.png" class="img-fluid" id="peti" width="50%" style="float: center" onclick="javascript:usuario();"></center>
+ 						<center><img src="img/petirrojoOficial.png" class="img-fluid" id="peti" width="50%" style="float: center" onclick="javascript:usuario();"></center>
  					</div>
  				</div>
  			</div>
  			<div class="col-md-7">
  				<div class="card my-5 animated bounceInRight" style="background: #FFF;">
- 				<center><h1 class="text-primary mx-5 my-5"><img src="img/logoTec.png" class="img-fluid" width="10%"> &nbsp&nbspAdministrador&nbsp&nbsp<img src="img/sep.png" class="img-fluid" width="20%"></h1></center>
+ 				<center><h1 class="text-primary mx-5 my-5"><img src="img/SEP.png" class="img-fluid" width="20%">&nbsp;&nbsp;Administrador&nbsp;&nbsp;<img src="img/logoTec.png" class="img-fluid" width="10%"></h1></center>
 				<form  class="form-block my-2 p-5" id="form-login-admin" action="javascript:verificaAdmin();">
 					<input type="text" name="admin" id="usuario" class="form-control mr-sm-2 my-3 mx-2" placeholder="Usuario" required>
 					<input type="password" name="password" id="password" class="form-control mr-sm-2 my-3 mx-2" placeholder="Contraseña" required>

@@ -18,7 +18,7 @@ if (!$_SESSION["alumno"]["nombre"]) {
 	<link rel="stylesheet" type="text/css" href="css/sweetalert2.min.css">
   <link rel="stylesheet" type="text/css" href="css/estilo.css">
 </head>
-<body id="body"style="background-image: url('img/petirrojos.png');background-size:400px;background-position:center;background-repeat: no-repeat;">
+<body id="body"style="background-image: url('img/petirrojoOficial.png');background-size:400px;background-position:center;background-repeat: no-repeat;">
 	<!--Navbar-->
 
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: #003f87">
@@ -47,8 +47,9 @@ if (!$_SESSION["alumno"]["nombre"]) {
               <br><br>
           <label class="display-4 text-dark" align="center">ENCUESTA DE SERVICIO</label>
           <p align="left" class="h3 m-3">Estimado Estudiante: @<?php echo $_SESSION['alumno']['nombre'];?></p>
-          <p align="left" class="h3 m-3" style="text-align: justify;">En nuestro Instituto Tecnológico tenemos la misión y el firme compromiso de satisfacer plenamente tus necesidades y requerimientos en los servicios que ofrecemos, buscando mejorar permanentemente nuestro desempeño y servirte mejor.</p>
-          <p align="left" class="h3 m-3" style="text-align: justify;">Para lograr esto, lo más valioso es su opinión, por lo que se solicita responder con sinceridad un breve cuestionario anexo, cuya respuesta será la mejor ayuda para superarnos.</p>
+          <p align="left" class="h3 m-3" style="text-align: justify;">El Instituto Tecnológico tiene el firme compromiso de satisfacer plenamente tus necesidades en el  servicio educativo que te ofrece durante tu estancia en esta casa de estudios, buscando mejorar permanentemente nuestro desempeño para servirte cada vez mejor.</p>
+          <p align="left" class="h3 m-3" style="text-align: justify;">Para lograr esto, lo más valioso es tu opinión, por lo que se solicita responder con toda sinceridad este cuestionario anexo, cuya respuesta será la mejor ayuda para superarnos.</p>
+          <p align="left" class="h3 m-3" style="text-align: justify;">También te pedimos si así lo consideras, aportar tus comentarios, sugerencias o quejas, para tomar en cuenta las aportaciones y atender las necesidades en cada departamento que te ofrece servicio.</p>
           <p align="left" class="h3 m-3" style="text-align: justify;">Se agradece tu atención a la presente y me reitero a tu disposición.</p>
           <p align="center" class="h3 m-3" style="text-align: center;"> ATENTAMENTE </p>
           <p align="center" class="h3 m-3" style="text-align: center;">DIRECTOR </p>

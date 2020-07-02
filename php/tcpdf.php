@@ -17,7 +17,7 @@ class EDITPDF extends TCPDF {
 		$fechai=date_format(new DateTime($fecha[0]), 'd/m/Y');
 		$fechaf=date_format(new DateTime($fecha[1]), 'd/m/Y');
 		$origen1 = "../img/logoTec.jpg";
-		$origen2 = "../img/sep.jpg";
+		$origen2 = "../img/SEP.jpg";
 		$destino = '../img/';
 		copy($origen1, $destino."logo1.jpg");
 		copy($origen2, $destino."logo2.jpg");
@@ -26,8 +26,8 @@ class EDITPDF extends TCPDF {
         $this->SetFont('helvetica', 'B', 18);
         $head='<table>
         	   		<tr>
-        	   			<td width="70"><img src="'.$image_file2.'" width="70" height="50"></td>
-						<td width="500" align="center"><h2  align="center">Instituto Tecnológico de Zitácuaro</h2></td>
+        	   			<td width="120"><img src="'.$image_file2.'" width="110" height="50"></td>
+						<td width="450" align="center"><h2  align="center">Instituto Tecnológico de Zitácuaro</h2></td>
 						<td width="70"><img src="'.$image_file1.'" width="50" height="50"></td>
         	   		</tr>
         	   		<tr>

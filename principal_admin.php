@@ -66,7 +66,7 @@
 					</div>
 					<div class="row my-3">
 						<div class="col-md-10"><label class="h1 text-dark text-rigth text-justify">Sistema de Encuestas de Satisfacción de los Departamentos del Instituto Tecnológico De Zitacuaro.</label></div>
-						<div class="col-md-2"><img src="img/petirrojos.png" style="width: 150px" class="img-fluid"></div>
+						<div class="col-md-2"><img src="img/petirrojoOficial.png" style="width: 150px" class="img-fluid"></div>
 					</div>
 				</div>
 			</div>

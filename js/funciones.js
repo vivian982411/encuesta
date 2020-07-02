@@ -889,7 +889,7 @@ function guardarEncuesta() {
                 });
             } else {
                 //console.log(info);
-                document.getElementById("body").setAttribute("style", "background-image: url('img/petirrojos.png');background-size:400px;background-position:center;background-repeat: no-repeat;");
+                document.getElementById("body").setAttribute("style", "background-image: url('img/petirrojoOficial.png');background-size:400px;background-position:center;background-repeat: no-repeat;");
                 document.getElementById("contenido").innerHTML = "";
                 document.getElementById("contenido").innerHTML = info;
             }
