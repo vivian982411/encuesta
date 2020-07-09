@@ -8,6 +8,7 @@ function usuario() {
 
 function verificaAdmin() {
     var f = document.querySelector("#form-login-admin");
+    configureLoadingScreen();
     $.ajax({
             url: 'php/proceso.php',
             type: 'POST',
@@ -20,7 +21,7 @@ function verificaAdmin() {
             },
         })
         .done(function(info) {
-            console.log(info);
+            disableLoadingScreen();
             if (info == "ok") {
                 window.location = "principal_admin.php";
             } else {
@@ -32,6 +33,7 @@ function verificaAdmin() {
             }
         })
         .fail(function() {
+            disableLoadingScreen();
             Swal.fire({
                 title: 'Error al conectar con el servidor',
                 text: 'Revise su conexion o intente mas tarde',
@@ -39,13 +41,14 @@ function verificaAdmin() {
             });
         })
         .always(function() {
-            console.log("complete");
+            disableLoadingScreen();
         });
 
 }
 
 function cerrarAdmi() {
     var datos = new FormData();
+    configureLoadingScreen();
     $.ajax({
             url: 'php/proceso.php',
             type: 'POST',
@@ -56,19 +59,30 @@ function cerrarAdmi() {
             },
         })
         .done(function() {
+            disableLoadingScreen();
             window.location = "login_admin.php";
         })
         .fail(function() {
-            console.log("error");
+            disableLoadingScreen();
         })
         .always(function() {
-            console.log("complete");
+            disableLoadingScreen();
         });
 
 }
 
+function configureLoadingScreen() {
+    document.getElementById("loading").style.display = "block";
+    console.log("screen");
+}
+
+function disableLoadingScreen() {
+    document.getElementById("loading").style.display = "none";
+}
+
 function verificaLog() {
     var f = document.querySelector("#form-login");
+    configureLoadingScreen();
     $.ajax({
             url: 'php/proceso.php',
             type: 'POST',
@@ -80,13 +94,8 @@ function verificaLog() {
             },
         })
         .done(function(info) {
-            console.log(info);
+            disableLoadingScreen();
             if (info == "ok") {
-                Swal.fire({
-                    title: 'Bienvenido',
-                    text: 'Ingreso correctamente',
-                    icon: 'success',
-                });
                 window.location = "principal.php";
             } else if (info == "verificado") {
                 Swal.fire({
@@ -109,6 +118,7 @@ function verificaLog() {
             }
         })
         .fail(function() {
+            disableLoadingScreen();
             Swal.fire({
                 title: 'Error al conectar con el servidor',
                 text: 'Revise su conexion o intenet mas tarde',
@@ -116,13 +126,14 @@ function verificaLog() {
             });
         })
         .always(function() {
-            console.log("complete");
+            disableLoadingScreen();
         });
 
 }
 
 function cerrar() {
     var datos = new FormData();
+    configureLoadingScreen();
     $.ajax({
             url: 'php/proceso.php',
             type: 'POST',
@@ -133,13 +144,14 @@ function cerrar() {
             },
         })
         .done(function() {
+            disableLoadingScreen();
             window.location = "index.php";
         })
         .fail(function() {
-            console.log("error");
+            disableLoadingScreen();
         })
         .always(function() {
-            console.log("complete");
+            disableLoadingScreen();
         });
 
 }
@@ -160,6 +172,7 @@ function mostrarVista(vista, subvista, id) {
 }
 
 function mostrarVistaAlumnos(vista, subvista) {
+    configureLoadingScreen();
     $.ajax({
             url: 'php/vistas.php',
             type: 'POST',
@@ -190,18 +203,20 @@ function mostrarVistaAlumnos(vista, subvista) {
                 var chart = new google.visualization.PieChart(document.getElementById("grafico"));
                 chart.draw(data, options);
             }
+            disableLoadingScreen();
         })
         .fail(function() {
-            console.log("error");
+            disableLoadingScreen();
         })
         .always(function() {
-            console.log("complete");
+            disableLoadingScreen();
         });
 
 }
 
 function mostrarVistaDepartamento(id, nombredep, dep) {
     var titulo = dep;
+    configureLoadingScreen();
     $.ajax({
             url: 'php/proceso.php',
             type: 'POST',
@@ -213,7 +228,6 @@ function mostrarVistaDepartamento(id, nombredep, dep) {
             },
         })
         .done(function(info) {
-
             document.getElementById("contenedor-departamento").innerHTML = "";
             var respuestas = info.split("---");
             var filas = respuestas[0].split(";");
@@ -364,13 +378,13 @@ function mostrarVistaDepartamento(id, nombredep, dep) {
             tabla2.appendChild(tbody2);
             div.appendChild(tabla2);
             document.getElementById("contenedor-departamento").appendChild(div);
-
+            disableLoadingScreen();
         })
         .fail(function() {
-            console.log("error");
+            disableLoadingScreen();
         })
         .always(function() {
-            console.log("complete");
+            disableLoadingScreen();
         });
 }
 
@@ -384,6 +398,7 @@ function nuevoDepartamento() {
             preguntas += "" + document.getElementById("pregunta" + i).value + "|";
         }
     }
+    configureLoadingScreen();
     $.ajax({
             url: 'php/proceso.php',
             type: 'POST',
@@ -396,6 +411,7 @@ function nuevoDepartamento() {
             },
         })
         .done(function(info) {
+            disableLoadingScreen();
             if (info == "ok") {
                 Swal.fire({
                     title: '',
@@ -406,15 +422,16 @@ function nuevoDepartamento() {
             }
         })
         .fail(function() {
-            console.log("error");
+            disableLoadingScreen();
         })
         .always(function() {
-            console.log("complete");
+            disableLoadingScreen();
         });
 
 }
 
 function nuevaPregunta(id, nombredep, dep) {
+    configureLoadingScreen();
     $.ajax({
             url: 'php/vistas.php',
             type: 'POST',
@@ -429,18 +446,20 @@ function nuevaPregunta(id, nombredep, dep) {
         })
         .done(function(info) {
             document.getElementById("contenedor-departamento").innerHTML = info;
+            disableLoadingScreen();
         })
         .fail(function() {
-            console.log("error");
+            disableLoadingScreen();
         })
         .always(function() {
-            console.log("complete");
+            disableLoadingScreen();
         });
 
 }
 
 function guardarNuevaPregunta(id, nombredep, dep) {
     var pregunta = document.getElementById("nueva_pregunta").value;
+    configureLoadingScreen();
     $.ajax({
             url: 'php/proceso.php',
             type: 'POST',
@@ -453,6 +472,7 @@ function guardarNuevaPregunta(id, nombredep, dep) {
             },
         })
         .done(function(info) {
+            disableLoadingScreen();
             if (info == "ok") {
                 Swal.fire({
                     title: '',
@@ -469,6 +489,7 @@ function guardarNuevaPregunta(id, nombredep, dep) {
             }
         })
         .fail(function() {
+            disableLoadingScreen();
             Swal.fire({
                 title: '',
                 text: 'Error al conectar con el servidor',
@@ -476,13 +497,14 @@ function guardarNuevaPregunta(id, nombredep, dep) {
             });
         })
         .always(function() {
-            console.log("complete");
+            disableLoadingScreen();
         });
 
 }
 
 function guardarPregunta(e, id, dep) {
     if (e.keyCode === 13 && !e.shiftKey) {
+        configureLoadingScreen();
         $.ajax({
                 url: 'php/proceso.php',
                 type: 'POST',
@@ -495,15 +517,16 @@ function guardarPregunta(e, id, dep) {
                 },
             })
             .done(function(info) {
+                disableLoadingScreen();
                 if (info = "ok") {
                     mostrarVistaDepartamento(dep, "mostrardepartamento");
                 }
             })
             .fail(function() {
-                console.log("error");
+                disableLoadingScreen();
             })
             .always(function() {
-                console.log("complete");
+                disableLoadingScreen();
             });
     }
 }
@@ -588,6 +611,7 @@ function crearEncuesta(id) {
     var dep = "";
     var dep1 = "";
     var iddep = id;
+    configureLoadingScreen();
     $.ajax({
             url: 'php/proceso.php',
             type: 'POST',
@@ -599,12 +623,9 @@ function crearEncuesta(id) {
             },
         })
         .done(function(e) {
-            console.log(e);
             var info = e.split("---");
             var deptos = info[0].split("|");
             var arrayPreguntas = info[1].split(";");
-            console.log("Deptos" + deptos);
-            console.log("Preg" + arrayPreguntas);
             var boton = document.createElement("a");
             boton.setAttribute("href", "#body");
             boton.setAttribute("class", "btn btn-primary m-5");
@@ -701,7 +722,6 @@ function crearEncuesta(id) {
             var p = arrayPreguntas;
             cad = "";
             for (var i = 0; i < p.length - 1; i++) {
-                console.log(p[i]);
                 cad += "" + p[i].split("|")[0] + "|";
             }
             cad += ";";
@@ -843,13 +863,13 @@ function crearEncuesta(id) {
             document.getElementById("contenido").appendChild(fila);
             document.getElementById("contenido").appendChild(form);
             document.getElementById("body").setAttribute("style", "");
-
+            disableLoadingScreen();
         })
         .fail(function() {
-            console.log("error");
+            disableLoadingScreen();
         })
         .always(function() {
-            console.log("complete");
+            disableLoadingScreen();
         });
 
 }
@@ -884,6 +904,7 @@ function guardarEncuesta() {
             },
         })
         .done(function(info) {
+            disableLoadingScreen();
             if (info == "error") {
                 Swal.fire({
                     title: 'Ocurrio un error al guardarla encuesta',
@@ -898,15 +919,16 @@ function guardarEncuesta() {
             }
         })
         .fail(function(info) {
-
+            disableLoadingScreen();
         })
         .always(function() {
-            console.log("complete");
+            disableLoadingScreen();
         });
 
 }
 
 function showDepartamentos() {
+    configureLoadingScreen();
     $.ajax({
             url: 'php/proceso.php',
             type: 'POST',
@@ -928,17 +950,19 @@ function showDepartamentos() {
                 div1.innerHTML = "" + departamento[1];
                 document.getElementById("containerDepartamentos").appendChild(div1);
             }
+            disableLoadingScreen();
         })
         .fail(function() {
-            console.log("error");
+            disableLoadingScreen();
         })
         .always(function() {
-            console.log("complete");
+            disableLoadingScreen();
         });
 }
 
 function generarXLS(id, nombredep) {
     var nombre = nombredep;
+    configureLoadingScreen();
     $.ajax({
             url: 'php/proceso.php',
             type: 'POST',
@@ -951,7 +975,7 @@ function generarXLS(id, nombredep) {
             },
         })
         .done(function(e) {
-            console.log(e);
+            disableLoadingScreen();
             Swal.fire({
                 title: 'Generado',
                 text: 'El Reporte se generó correctamente',
@@ -961,10 +985,10 @@ function generarXLS(id, nombredep) {
 
         })
         .fail(function() {
-            console.log("error");
+            disableLoadingScreen();
         })
         .always(function() {
-            console.log("complete");
+            disableLoadingScreen();
         });
 }
 
@@ -979,6 +1003,7 @@ function reiniciarSistema() {
 function configurarPeriodo() {
     var f = document.querySelector("#form-configurar");
     //console.log(f.fechainicio.value + " y " + f.fechafin.value);
+    configureLoadingScreen();
     $.ajax({
             url: 'php/proceso.php',
             type: 'POST',
@@ -991,7 +1016,7 @@ function configurarPeriodo() {
             },
         })
         .done(function(info) {
-            console.log(info);
+            disableLoadingScreen();
             if (info == "ok") {
                 Swal.fire({
                     title: 'Actualizado',
@@ -1008,6 +1033,7 @@ function configurarPeriodo() {
             }
         })
         .fail(function() {
+            disableLoadingScreen();
             Swal.fire({
                 title: 'Error al conectar con el servidor',
                 text: 'Revise su conexion o intente mas tarde',
@@ -1015,7 +1041,7 @@ function configurarPeriodo() {
             });
         })
         .always(function() {
-            console.log("complete");
+            disableLoadingScreen();
         });
 }
 
@@ -1035,6 +1061,7 @@ async function actualizaDatosAdmin() {
     if (password) {
         //Swal.fire(`Entered password: ${password}`)
         console.log(password);
+        configureLoadingScreen();
         $.ajax({
                 url: 'php/proceso.php',
                 type: 'POST',
@@ -1049,7 +1076,7 @@ async function actualizaDatosAdmin() {
                 },
             })
             .done(function(info) {
-                console.log(info);
+                disableLoadingScreen();
                 if (info == 'ok') {
                     Swal.fire({
                         title: 'Actualizado',
@@ -1078,6 +1105,7 @@ async function actualizaDatosAdmin() {
                 }
             })
             .fail(function() {
+                disableLoadingScreen();
                 Swal.fire({
                     title: 'Error al conectar con el servidor',
                     text: 'Revise su conexion o intente mas tarde',
@@ -1085,7 +1113,7 @@ async function actualizaDatosAdmin() {
                 });
             })
             .always(function() {
-                console.log("complete");
+                disableLoadingScreen();
             });
     }
 }

@@ -65,7 +65,9 @@ if (isset($_SESSION["alumno"]["nocontrol"])) {
     </div>
     </div>
   </div>
-
+<div id="loading">
+		<img id="loading-image" src="img/loading.svg" alt="icono cargando">
+	</div>
 
   <!--Cuerpo-->
 <script type ="text/javascript" src="js/jquery-3.4.1.min.js"></script>

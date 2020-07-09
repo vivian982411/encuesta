@@ -41,7 +41,9 @@ session_start();
  			</div>
  		</div>
 	</div>
-	
+	<div id="loading">
+		<img id="loading-image" src="img/loading.svg" alt="icono cargando">
+	</div>
 	<script type ="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 	<script type ="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type ="text/javascript" src="js/sweetalert2.all.min.js"></script>
