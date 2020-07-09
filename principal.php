@@ -1,27 +1,29 @@
 <?php
 session_start();
-if (!$_SESSION["alumno"]["nombre"]) {
-    header("location:index.php");
-
-  } else {?>
+require_once("php/alumno.lib.php");
+$cabeza="";
+if (isset($_SESSION["alumno"]["nocontrol"])) {
+  $alu= new Alumno();
+  $verificacion=$alu->verificarEncuesta($_SESSION["alumno"]["nocontrol"]);
+  if($alu->verificarPeriodo() && $verificacion == ""){?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Principal</title>
+  <title>Principal</title>
   <script type="text/javascript" src="js/funciones.js"></script>
-	<meta charset="utf-8">
-	<meta name="portview" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="shortcut icon" href="#">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="css/animate.css">
-	<link rel="stylesheet" type="text/css" href="css/sweetalert2.min.css">
+  <meta charset="utf-8">
+  <meta name="portview" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="#">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/animate.css">
+  <link rel="stylesheet" type="text/css" href="css/sweetalert2.min.css">
   <link rel="stylesheet" type="text/css" href="css/estilo.css">
 </head>
 <body id="body"style="background-image: url('img/petirrojoOficial.png');background-size:400px;background-position:center;background-repeat: no-repeat;">
-	<!--Navbar-->
+  <!--Navbar-->
 
-	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: #003f87">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: #003f87">
   <a class="navbar-brand" style="float: right;" href="principal.php"><i class="fas fa-user-circle"></i> Alumno <?php echo $_SESSION ['alumno']['nombre'];?></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -35,12 +37,12 @@ if (!$_SESSION["alumno"]["nombre"]) {
   </div>
 </nav>
 
-	<!--Navbar-->
-	<!--Cuerpo-->
+  <!--Navbar-->
+  <!--Cuerpo-->
 <br>
-	<div class="container-fluid mt-2">
-		<div class="row">
-		<div class="col-md-12">
+  <div class="container-fluid mt-2">
+    <div class="row">
+    <div class="col-md-12">
         <div class="row">
           <div class="col-md-12" id="contenido" style="margin-bottom: 5%">
             <div class="card m-5 animated bounceInDown" style="background-color:rgba(255,255,255,0.8);">
@@ -60,19 +62,27 @@ if (!$_SESSION["alumno"]["nombre"]) {
             </div>
           </div>
         </div>
-		</div>
- 		</div>
-	</div>
+    </div>
+    </div>
+  </div>
 
 
-	<!--Cuerpo-->
+  <!--Cuerpo-->
 <script type ="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <script type ="text/javascript" src="js/bootstrap.min.js"></script>
 <script type ="text/javascript" src="js/sweetalert2.all.min.js"></script>
 <script src="https://kit.fontawesome.com/b2c84686c6.js" crossorigin="anonymous"></script>
 </body>
 </html>
-<?php 
+<?php
+  }else{
+    $cabeza="error";
   }
-  
+}else{
+  $cabeza="error";
+}
+if ($cabeza=="error") {
+  session_destroy();
+  header("location:index.php");
+}
 ?>

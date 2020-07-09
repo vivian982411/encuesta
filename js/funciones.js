@@ -570,6 +570,7 @@ function validarEncuesta(id, max) {
         }
         var respuestas = cad.split("|");
         if (np == respuestas.length - 1) {
+            document.getElementById("btn-accion").disabled = true;
             crearEncuesta(id);
         } else {
             Swal.fire({
@@ -583,8 +584,7 @@ function validarEncuesta(id, max) {
 
 function crearEncuesta(id) {
     var valorInputPreguntas = $("#preguntas").val() === undefined ? "" : $("#preguntas").val();
-
-    console.log("Este es el valor de preguntas: " + valorInputPreguntas);
+    //console.log("Este es el valor de preguntas: " + valorInputPreguntas);
     var dep = "";
     var dep1 = "";
     var iddep = id;
@@ -619,6 +619,7 @@ function crearEncuesta(id) {
             if (id == 1) {
                 var boton = document.createElement("a");
                 boton.setAttribute("href", "#body");
+                boton.setAttribute("id", "btn-accion");
                 boton.setAttribute("class", "btn btn-primary m-5");
                 boton.innerHTML = "Siguiente";
                 boton.setAttribute("onclick", "validarEncuesta(" + (id + "," + deptos[2]) + ");");
@@ -635,6 +636,7 @@ function crearEncuesta(id) {
             } else if (id != deptos[2]) {
                 var boton = document.createElement("a");
                 boton.setAttribute("href", "#body");
+                boton.setAttribute("id", "btn-accion");
                 boton.setAttribute("class", "btn btn-primary m-5");
                 boton.innerHTML = "Siguiente";
                 boton.setAttribute("onclick", "validarEncuesta(" + (id + "," + deptos[2]) + ");");
@@ -665,6 +667,7 @@ function crearEncuesta(id) {
             } else {
                 var boton = document.createElement("a");
                 boton.setAttribute("href", "#body");
+                boton.setAttribute("id", "btn-accion");
                 boton.setAttribute("class", "btn btn-success m-5");
                 boton.innerHTML = "Finalizar";
                 boton.setAttribute("onclick", "validarEncuesta(" + (id + "," + deptos[2]) + ");");
