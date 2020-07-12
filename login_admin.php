@@ -10,7 +10,7 @@ session_start();
 	<title>Inicio de sesión Administrador</title>
 	<meta charset="utf-8">
 	<meta name="portview" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="shortcut icon" href="#">
+	<link rel="shortcut icon" href="img/petirrojos.ico">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/animate.css">
@@ -21,7 +21,7 @@ session_start();
 
  	<div class="container">
  		<div class="row my-5">
- 			<div class="col-md-5 card" style="background-image: url(img/html-color-codes-color-tutorials-hero-00e10b1f.jpg);">
+ 			<div class="col-md-5 card" style="background-image: url(img/background.jpg);">
  				<div class="row">
  					<div class="col-12">
  						<center><label class="display-4 text-white my-5">Encuesta de Satisfacción</label></center>

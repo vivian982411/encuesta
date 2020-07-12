@@ -10,7 +10,7 @@ session_start();
 	<title>Inicio de sesión</title>
 	<meta charset="utf-8">
 	<meta name="portview" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="shortcut icon" href="#">
+	<link rel="shortcut icon" href="img/petirrojos.ico">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/animate.css">
@@ -20,7 +20,7 @@ session_start();
 
  	<div class="container">
  		<div class="row my-5">
- 			<div class="col-md-5 card" style="background-image: url(img/html-color-codes-color-tutorials-hero-00e10b1f.jpg);">
+ 			<div class="col-md-5 card" style="background-image: url(img/background.jpg);">
  				<div class="row">
  					<div class="col-12">
  						<center><label class="display-4 text-white my-5">Encuesta de Satisfacción</label></center>
@@ -43,6 +43,56 @@ session_start();
 	<div id="loading">
 		<img id="loading-image" src="img/loading.svg" alt="icono cargando">
 	</div>
+	<!-- Footer -->
+<footer class="page-footer font-small cyan darken-3">
+
+  <!-- Footer Elements -->
+  <div class="container-fluid">
+
+    <!-- Grid row-->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-12 py-2" style="background:#E0E0E0;">
+        <div class="my-2 mb-2 text-center">
+
+          <!-- Facebook -->
+          <a class="fb-ic text-dark" href="https://www.facebook.com/institutotecnologico.dezitacuaro">
+            <i class="fab fa-facebook-f fa-lg  mr-md-5 mr-3 fa-2x" style="text-decoration:none;"></i>Instituto Tecnológico de Zitácuaro
+		  </a>
+		  <a class="fb-ic text-dark" href="http://portal.itzitacuaro.edu.mx/">
+            <img class="mr-md-5 mr-3 fa-2x mx-5" src="img/petirrojos.svg" width="40px"/>Instituto Tecnológico de Zitácuaro
+          </a>
+		  <br>
+		  <br>
+          <!-- Google +-->
+          <a class="gplus-ic">
+            <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>Vivian Juarez De la O vivian982411@gmail.com
+		  </a>
+		  
+		  <!-- Google +-->
+          <a class="gplus-ic">
+            <i class="fab fa-google-plus-g fa-lg white-text mx-5 mr-md-5 mr-3 fa-2x"> </i>Brandon Quiroz Quiroz branqq1598@gmail.com
+          </a>
+		  
+        </div>
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row-->
+
+  </div>
+  <!-- Footer Elements -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center text-white py-3 bg-primary" >© 2020 Copyright:
+    <a class="text-white" href="http://portal.itzitacuaro.edu.mx/"> Instituto Tecnológico de Zitácuaro</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 	<script type="text/javascript" src="js/funciones.js"></script>
 	<script type ="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 	<script type ="text/javascript" src="js/bootstrap.min.js"></script>

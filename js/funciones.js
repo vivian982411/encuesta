@@ -623,8 +623,36 @@ function crearEncuesta(id) {
             },
         })
         .done(function(e) {
+            console.log(e);
+
             var info = e.split("---");
             var deptos = info[0].split("|");
+            var session = info[2];
+            console.log("Session " + session);
+            console.log("Nombre" + deptos[1]);
+            if (session == 0 && deptos[1] == "residencias profesionales") {
+                configureLoadingScreen();
+                crearEncuesta(id + 1);
+                return;
+            } else if (session == 1 && deptos[1] == "servicio social") {
+                if (deptos[2] != (id)) {
+                    configureLoadingScreen();
+                    crearEncuesta(id + 1);
+                } else {
+                    configureLoadingScreen();
+                    guardarEncuesta();
+                }
+                return;
+            } else if (session == 2 && (deptos[1] == "servicio social" || deptos[1] == "residencias profesionales")) {
+                if (deptos[2] != (id)) {
+                    configureLoadingScreen();
+                    crearEncuesta(id + 1);
+                } else {
+                    configureLoadingScreen();
+                    guardarEncuesta();
+                }
+                return;
+            }
             var arrayPreguntas = info[1].split(";");
             var boton = document.createElement("a");
             boton.setAttribute("href", "#body");
@@ -890,6 +918,7 @@ function guardarEncuesta() {
     var respuestas = $("#respuestas").val() + "" + cad;
     var comentarios = $("#comentarios").val() + "" + $("#comentario").val() + ";"
     var preguntas = $("#preguntas").val() + "" + cad;
+    configureLoadingScreen();
     $.ajax({
             url: 'php/proceso.php',
             type: 'POST',
@@ -904,7 +933,6 @@ function guardarEncuesta() {
             },
         })
         .done(function(info) {
-            disableLoadingScreen();
             if (info == "error") {
                 Swal.fire({
                     title: 'Ocurrio un error al guardarla encuesta',
@@ -917,6 +945,7 @@ function guardarEncuesta() {
                 document.getElementById("contenido").innerHTML = "";
                 document.getElementById("contenido").innerHTML = info;
             }
+            disableLoadingScreen();
         })
         .fail(function(info) {
             disableLoadingScreen();
@@ -1116,4 +1145,35 @@ async function actualizaDatosAdmin() {
                 disableLoadingScreen();
             });
     }
+}
+
+function verificarPregunta() {
+    var form = document.querySelector("#form-pregunta");
+    configureLoadingScreen();
+    $.ajax({
+            url: 'php/proceso.php',
+            type: 'POST',
+            dataType: 'html',
+            data: {
+                opc: 'encuesta',
+                acc: 'guardarPreguntaInicial',
+                depto: form.pregunta.value
+            },
+        })
+        .done(function(info) {
+            console.log(info);
+            disableLoadingScreen();
+            crearEncuesta('1');
+        })
+        .fail(function() {
+            disableLoadingScreen();
+            Swal.fire({
+                title: 'Error al conectar con el servidor',
+                text: 'Revise su conexion o intente mas tarde',
+                icon: 'error',
+            });
+        })
+        .always(function() {
+            disableLoadingScreen();
+        });
 }

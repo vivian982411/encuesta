@@ -13,13 +13,14 @@ if (isset($_SESSION["alumno"]["nocontrol"])) {
   <script type="text/javascript" src="js/funciones.js"></script>
   <meta charset="utf-8">
   <meta name="portview" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="shortcut icon" href="#">
+  <link rel="shortcut icon" href="img/petirrojos.ico">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="css/animate.css">
   <link rel="stylesheet" type="text/css" href="css/sweetalert2.min.css">
   <link rel="stylesheet" type="text/css" href="css/estilo.css">
 </head>
+ <!--oncontextmenu="return false" onkeydown="return false"--> 
 <body id="body"style="background-image: url('img/petirrojoOficial.png');background-size:400px;background-position:center;background-repeat: no-repeat;">
   <!--Navbar-->
 

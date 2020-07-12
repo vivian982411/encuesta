@@ -10,7 +10,8 @@
 <html lang="en">
   <head>
   	<title>Panel Administrador</title>
-    <meta charset="utf-8">
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="img/petirrojos.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script type="text/javascript" src="js/loader.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">

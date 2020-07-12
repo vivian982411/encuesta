@@ -8,11 +8,16 @@ require_once 'departamento.lib.php';
 		case 'encuesta':
 			$enc = new Encuesta();
 			switch ($_POST["acc"]) {
+				case 'guardarPreguntaInicial':
+					$_SESSION['alumno']['tipo']=$_POST['depto'];
+					echo $_SESSION['alumno']['tipo'];
+				break;
 				case 'buscarDepartamento':
 					$var= $enc->getDepartamento($_POST['idDep']);
 					$info=explode("|",$var);
 					echo $var."---";
 					echo $preguntas=$enc->getPreguntas($info[0]);
+					echo "---".$_SESSION['alumno']['tipo'];
 					break;
 				case 'obtenerPreguntas':
 					echo $preguntas=$enc->getPreguntas($_POST['id']);
@@ -24,8 +29,8 @@ require_once 'departamento.lib.php';
 								<div class='col-md-1'></div>
 								<div class='col-md-10'>
 									<label class='display-4 text-dark m-5'>@".$_SESSION['alumno']['nombre']."</label><br>
-									<label class='h1 text-success'>Gracias por tu tiempo.</label>
-									<div class='row'>
+									<center><label class='h1 text-success m-5'>Gracias por tu tiempo.</label>
+									</center><div class='row'>
 										<div class='col-md-3'></div>
 										<div class='col-md-6'>
 											<input type='button' class='btn btn-success form-control' onclick='cerrar();' value='Cerrar Sesion'>

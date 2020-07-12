@@ -5,6 +5,28 @@ require_once ("departamento.lib.php");
 	switch ($_POST['opc']) {
 		case 'encuesta':
 			switch ($_POST["acc"]) {
+				case 'inicial':
+					echo '<div class="card m-5 animated bounceInDown" style="background-color:rgba(255,255,255,0.8); ">
+						<form id="form-pregunta" action="javascript:verificarPregunta();">
+							<div class="row my-5">
+								<div class="col-12 m-5">
+									<h1>Estoy cursando:</h1>
+									<br><br>
+									<input type="radio" required id="pregunta1" name="pregunta" value="0"> 
+									<label class="h4" for="pregunta1">Servicio Social</label>
+									<br>
+									<input type="radio" required id="pregunta2" name="pregunta" value="1"> 
+									<label class="h4" for="pregunta2">Residencias</label>
+									<br>
+									<input type="radio" required name="pregunta" id="pregunta3" value="2">
+									<label class="h4" for="pregunta3">Ninguna de las anteriores</label>
+									<br><br>
+									<input type="submit" class="btn btn-primary" id="btniniciarEncuesta2" value="Siguiente">
+								</div>
+							</div>
+						</form>	
+					</div>';
+				break;
 				case 'instrucciones':
 					echo '<div class="card m-5 animated bounceInDown" style="background-color:rgba(255,255,255,0.8); ">
           					<label class="display-4 text-dark" align="center">INSTRUCCIONES</label>
@@ -50,7 +72,7 @@ require_once ("departamento.lib.php");
 				          <div class="row">
 				            <div class="col-3"></div>
 				            <div class="col-6">
-				              <a name="iniciar" id="btniniciarEncuesta2" class="btn btn-primary my-2 form-control" onclick="crearEncuesta(\'1\')" href="#body">Iniciar Encuesta</a>
+				              <a name="iniciar" id="btniniciarEncuesta2" class="btn btn-primary my-2 form-control" onclick="mostrarVista(\'encuesta\',\'inicial\')" href="#body">Iniciar Encuesta</a>
 				            </div>
 				            <div class="col-3"></div>
 				            </div>
